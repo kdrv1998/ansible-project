@@ -1,0 +1,31 @@
+---
+- name: Create Web Server
+  hosts: centos
+  user: root
+  tasks:
+  - name: Install Apache
+    yum:
+      name: httpd
+      state: latest
+  - name: Start httpd
+    service:
+      name: httpd
+      state: started
+      enabled: yes
+  - name: Install Epel
+    yum:
+      name:
+      - epel-release
+      - yum-utils
+      state: latest
+  - name: Install unzip
+    package:
+      name: unzip
+      state: present
+  - name: Unarchive a file that needs to be downloaded (added in 2.0)
+    unarchive:
+      src: https://www.free-css.com/assets/files/free-css-templates/download/page274/agency-perfect.zip
+      dest: /root/
+      remote_src: yes
+  - name: Copy template to html
+    shell: "cp -r /root/html-freebie-agency-perfect-master/* /var/www/html/"
