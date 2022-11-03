@@ -1,2 +1,2 @@
 [centos]
-centos ansible_host=167.172.152.49
+centos ansible_host=167.172.128.207
